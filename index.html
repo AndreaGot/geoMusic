@@ -27,14 +27,14 @@
       google.maps.event.addListener(map, "click", function(event) {
     var lat = event.latLng.lat()
     , lng = event.latLng.lng();
-      $.get('http://maps.googleapis.com/maps/api/geocode/json?latlng='+lat+','+lng+'&sensor=false').done(function (data) {
+      $.get('http://maps.googleapis.com/maps/api/geocode/json?latlng='+lat+','+lng+'&sensor=false&language=en').done(function (data) {
         var result = data.results
         , address = result[result.length - 1]
         , state = address===undefined ? null : address['address_components'][0];
 		if(state)
       $.get('http://ws.audioscrobbler.com/2.0/?method=geo.gettoptracks&country=' + state.long_name + '&api_key=0da13e547db05209b66ce2938e54bc0d&format=json').done(function (data){
         console.log(data.tracks.track[0].name);
-      
+      alert("The most scrobbled song in this country is " + data.tracks.track[0].name);
       });
       });
 });
